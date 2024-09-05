@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.MusicStore", "Avalonia.MusicStore\Avalonia.MusicStore.csproj", "{C6F7339F-288C-42F5-8A4F-BA1B437FB5DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.MusicStore.Desktop", "Avalonia.MusicStore.Desktop\Avalonia.MusicStore.Desktop.csproj", "{44E6D099-32E9-44B5-B693-A505D1D06C34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6F7339F-288C-42F5-8A4F-BA1B437FB5DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F7339F-288C-42F5-8A4F-BA1B437FB5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F7339F-288C-42F5-8A4F-BA1B437FB5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F7339F-288C-42F5-8A4F-BA1B437FB5DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E6D099-32E9-44B5-B693-A505D1D06C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E6D099-32E9-44B5-B693-A505D1D06C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E6D099-32E9-44B5-B693-A505D1D06C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E6D099-32E9-44B5-B693-A505D1D06C34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01D7B375-37FB-4D8B-93AB-F1549889022C}
+	EndGlobalSection
+EndGlobal
