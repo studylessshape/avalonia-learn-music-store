@@ -27,5 +27,11 @@
                                              />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
+
+        <Panel Margin="20 30 20 20">
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top">
+                <PathIcon Data="{DynamicResource store_microsoft_regular}" />
+            </Button>
+        </Panel>
     </Panel>
 </UserControl>
