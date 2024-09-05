@@ -1,6 +1,12 @@
-﻿namespace Avalonia.MusicStore.ViewModels;
+﻿using CommunityToolkit.Mvvm.Input;
+
+namespace Avalonia.MusicStore.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public string Greeting => "Welcome to Avalonia!";
+    [RelayCommand]
+    private void BuyMusic()
+    {
+
+    }
 }
