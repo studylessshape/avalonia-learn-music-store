@@ -11,6 +11,7 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private async void BuyMusic()
     {
-        var album = await GetAlbumEvent?.Invoke()!;
+        var getTask = GetAlbumEvent?.Invoke();
+        var album = getTask == null ? null : await getTask;
     }
 }

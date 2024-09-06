@@ -206,3 +206,41 @@ public partial class MainViewModel : ViewModelBase
 这里直接复制过来了。
 
 - [ViewLocator.cs](./Avalonia.MusicStore/ViewLocator.cs)
+
+### 8. 专辑服务
+这一节有一个延迟执行的事件，并且这个事件是在 `SearchText` 改变之后执行。
+
+CommunityToolkit 中，对于使用 `ObservableProperty` 标记的字段，会自动生成其对应的属性。除此之外，还会生成一系列方法，在属性值改变时调用。可以通过 Visual Studio 的下拉列表来查看，灰色的并且以 `On` 开头的函数基本都是。
+
+![dropdown-onvalue-function](./docs/assets/dropdown-onvalue-function.png)
+
+此处需要实现的，是在值改变后调用的 `OnSearchTextChanged`。
+
+在 `MusicStoreViewModel` 中，新建两个字段，一个用来中止异步调用，一个用来标记等待时间。
+
+```csharp
+private CancellationTokenSource? _cancelToken = null;
+private readonly TimeSpan _waitTime = TimeSpan.FromMilliseconds(400);
+```
+
+再实现 `OnSearchTextChanged` 方法，先中止上一次的搜索 Task，然后再次新建一个 Task 用来执行搜索操作。
+
+```csharp
+partial void OnSearchTextChanged(string? value)
+{
+    if (_cancelToken != null)
+    {
+        _cancelToken.Cancel();
+        _cancelToken.Dispose();
+    }
+
+    _cancelToken = new();
+
+    Task.Run(async () =>
+    {
+        await Task.Delay(_waitTime, _cancelToken.Token);
+
+        DoSearch(SearchText);
+    }, _cancelToken.Token);
+}
+```

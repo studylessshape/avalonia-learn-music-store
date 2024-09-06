@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.MusicStore.ViewModels;
 
-namespace Avalonia.MusicStore;
+namespace Avalonia.MusicStore.Views;
 
 public partial class MusicStoreView : UserControl
 {

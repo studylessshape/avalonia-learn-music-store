@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Avalonia.MusicStore;
+namespace Avalonia.MusicStore.Views;
 
 public partial class MusicStoreWindow : Window
 {
