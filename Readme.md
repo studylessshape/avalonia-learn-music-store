@@ -199,3 +199,10 @@ public partial class MainViewModel : ViewModelBase
     }
 }
 ```
+
+### 7. 专辑视图
+这里的 `ViewLocator.cs` 是生成 MVVM 项目时项目模板中包含的。
+
+这里直接复制过来了。
+
+- [ViewLocator.cs](./Avalonia.MusicStore/ViewLocator.cs)
