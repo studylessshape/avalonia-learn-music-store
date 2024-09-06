@@ -1,8 +1,6 @@
-﻿using Avalonia.MusicStore.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.MusicStore.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
 
 namespace Avalonia.MusicStore.ViewModels
@@ -11,6 +9,8 @@ namespace Avalonia.MusicStore.ViewModels
     {
         private readonly Album _album;
 
+        [ObservableProperty]
+        private Bitmap? _cover;
         public AlbumViewModel(Album album)
         {
             _album = album;
@@ -18,5 +18,11 @@ namespace Avalonia.MusicStore.ViewModels
 
         public string Artist => _album.Artist;
         public string Title => _album.Title;
+
+        public async Task LoadCover()
+        {
+            await using var imageStream = await _album.LoadCoverBitmapAsync();
+            Cover = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 400));
+        }
     }
 }

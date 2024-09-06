@@ -244,3 +244,23 @@ partial void OnSearchTextChanged(string? value)
     }, _cancelToken.Token);
 }
 ```
+
+### 9. 专辑图像
+这里把路径做了下限制，确保缓存路径在程序目录下。
+
+```csharp
+private string CachePath
+{
+    get
+    {
+        string path = $"./Cache/{Artist} - {Title}";
+        var processDirectory = Path.GetDirectoryName(Environment.ProcessPath);
+        if (processDirectory != null)
+        {
+            path = Path.Combine(processDirectory, path);
+        }
+
+        return path;
+    }
+}
+```

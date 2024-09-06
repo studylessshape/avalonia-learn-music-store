@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,31 +29,37 @@ namespace Avalonia.MusicStore.ViewModels
             EnsureSelectEvent?.Invoke(SelectedAlbum);
         }
 
-        private CancellationTokenSource? _cancelToken = null;
+        private CancellationTokenSource? _searchCancelTokenSource;
         private readonly TimeSpan _waitTime = TimeSpan.FromMilliseconds(400);
 
         partial void OnSearchTextChanged(string? value)
         {
-            if (_cancelToken != null)
+            if (_searchCancelTokenSource != null)
             {
-                _cancelToken.Cancel();
-                _cancelToken.Dispose();
+                _searchCancelTokenSource.Cancel();
+                _searchCancelTokenSource.Dispose();
             }
 
-            _cancelToken = new();
+            _searchCancelTokenSource = new();
 
             Task.Run(async () =>
             {
-                await Task.Delay(_waitTime, _cancelToken.Token);
+                await Task.Delay(_waitTime, _searchCancelTokenSource.Token);
 
                 DoSearch(SearchText);
-            }, _cancelToken.Token);
+            }, _searchCancelTokenSource.Token);
         }
+
+        private CancellationTokenSource? _loadCoverCancelTokenSource;
 
         private async void DoSearch(string? searchText)
         {
             IsBusy = true;
             SearchResults.Clear();
+
+            _loadCoverCancelTokenSource?.Cancel();
+            _loadCoverCancelTokenSource = new();
+            var cancellationToken = _loadCoverCancelTokenSource.Token;
 
             if (!string.IsNullOrWhiteSpace(searchText))
             {
@@ -63,9 +70,27 @@ namespace Avalonia.MusicStore.ViewModels
                     var vm = new AlbumViewModel(item);
                     SearchResults.Add(vm);
                 }
+
+                if (!cancellationToken.IsCancellationRequested)
+                {
+                    LoadCovers(cancellationToken);
+                }
             }
 
             IsBusy = false;
+        }
+
+        private async void LoadCovers(CancellationToken cancellationToken)
+        {
+            foreach (var album in SearchResults.ToList())
+            {
+                await album.LoadCover();
+
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+            }
         }
     }
 }
