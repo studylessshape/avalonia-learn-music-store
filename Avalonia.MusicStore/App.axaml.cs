@@ -12,7 +12,7 @@ namespace Avalonia.MusicStore;
 
 public partial class App : Application
 {
-    private IServiceProvider? _serviceProvider;
+    public IServiceProvider ServiceProvider { get; private set; }
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -27,15 +27,15 @@ public partial class App : Application
         var serviceCollection = new ServiceCollection();
         serviceCollection.RegistAllServices();
 
-        _serviceProvider = serviceCollection.BuildServiceProvider();
+        ServiceProvider = serviceCollection.BuildServiceProvider();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = _serviceProvider.GetService<MainWindow>();
+            desktop.MainWindow = ServiceProvider.GetService<MainWindow>();
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = _serviceProvider.GetService<MainView>();
+            singleViewPlatform.MainView = ServiceProvider.GetService<MainView>();
         }
 
         base.OnFrameworkInitializationCompleted();
