@@ -297,3 +297,28 @@ public partial class MusicStoreWindow : Window
 ```
 
 这样，在点击 <kbd>Buy Music</kbd> 之后，就可以关闭窗口，并将选择的专辑作为 `ShowDialog` 的返回值。
+
+### 11. 添加数据持久性
+这里的文件名没有做合法化，会导致部分内容无法正常缓存。
+
+![filename-cant-has](./docs/assets/filename-cant-has.png)
+
+添加了一个 `StringExtensions` 的静态类。
+
+```csharp
+internal static class StringExtensions
+{
+    internal static string ValidFileName(this string filename)
+    {
+        var newStr = new StringBuilder(filename);
+        foreach (var invalidChar in Path.GetInvalidFileNameChars())
+        {
+            newStr.Replace($"{invalidChar}", "");
+        }
+
+        return newStr.ToString();
+    }
+}
+```
+
+从 `Path.GetInvalidFileNameChars()` 中获取非法的字符，然后将文件名中所有的不合法字符都替换为空。

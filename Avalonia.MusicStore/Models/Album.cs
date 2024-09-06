@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media;
+using Avalonia.MusicStore.Extensions;
 using iTunesSearch.Library;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ public class Album
             }
         }
     }
-    private string CachePath => Path.Combine(CacheDirectory, $"{Artist} - {Title}");
+    private string CachePath => Path.Combine(CacheDirectory, $"{Artist} - {Title}".ValidFileName());
 
     public async Task<Stream> LoadCoverBitmapAsync()
     {
