@@ -18,6 +18,18 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
 
-        <Panel Margin="40" />
+        <Panel Margin="40">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBox Watermark="Search for Albums..." />
+                    <ProgressBar IsIndeterminate="True" />
+                </StackPanel>
+                <Button Content="Buy Album"
+                        DockPanel.Dock="Bottom"
+                        HorizontalAlignment="Center"
+                        />
+                <ListBox />
+            </DockPanel>
+        </Panel>
     </Panel>
 </UserControl>
