@@ -18,6 +18,7 @@ public partial class MainViewModel : ViewModelBase
         if (result != null)
         {
             Albums.Add(result);
+            await result.SaveToDiskAsync();
         }
     }
 
