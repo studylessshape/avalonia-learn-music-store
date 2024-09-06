@@ -105,7 +105,7 @@ public class Album
 
         foreach (var file in Directory.EnumerateFiles(CacheDirectory))
         {
-            if (!string.IsNullOrWhiteSpace(new DirectoryInfo(file).FullName)) continue;
+            if (!string.IsNullOrWhiteSpace(new DirectoryInfo(file).Extension)) continue;
 
             await using var fs = File.OpenRead(file);
             var album = await Album.LoadFromStream(fs).ConfigureAwait(false);
