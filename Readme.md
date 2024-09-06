@@ -264,3 +264,36 @@ private string CachePath
     }
 }
 ```
+
+### 10. 对话框返回
+这里其实比较早就完成了，所以提交部分只修改了对应的字段名。
+
+和之前是同样的做法，在 ViewModel 中声明一个事件，然后在 Command 中调用。如这里是在点击 <kbd>Buy Music</kbd> 时，调用 `BuyMusicEvent`。
+
+```csharp
+public event Action<AlbumViewModel?>? BuyMusicEvent;
+
+[RelayCommand]
+private void BuyMusic()
+{
+    BuyMusicEvent?.Invoke(SelectedAlbum);
+}
+```
+
+然后在初始化 `MusicStoreWindow` 的时候，将 `Window.Close` 注册进去。
+
+```csharp
+public partial class MusicStoreWindow : Window
+{
+    public MusicStoreWindow(MusicStoreView view)
+    {
+        this.Content = view;
+
+        InitializeComponent();
+        // add 
+        view.ViewModel.BuyMusicEvent += Close;
+    }
+}
+```
+
+这样，在点击 <kbd>Buy Music</kbd> 之后，就可以关闭窗口，并将选择的专辑作为 `ShowDialog` 的返回值。

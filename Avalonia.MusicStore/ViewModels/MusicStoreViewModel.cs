@@ -21,12 +21,12 @@ namespace Avalonia.MusicStore.ViewModels
 
         public ObservableCollection<AlbumViewModel> SearchResults { get; } = [];
 
-        public event Action<AlbumViewModel?>? EnsureSelectEvent;
+        public event Action<AlbumViewModel?>? BuyMusicEvent;
 
         [RelayCommand]
-        private void EnsureSelect()
+        private void BuyMusic()
         {
-            EnsureSelectEvent?.Invoke(SelectedAlbum);
+            BuyMusicEvent?.Invoke(SelectedAlbum);
         }
 
         private CancellationTokenSource? _searchCancelTokenSource;

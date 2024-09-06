@@ -31,6 +31,7 @@
                 <Button Content="Buy Album"
                         DockPanel.Dock="Bottom"
                         HorizontalAlignment="Center"
+                        Command="{Binding BuyMusicCommand}"
                         />
                 <ListBox ItemsSource="{Binding SearchResults}"
                          SelectedItem="{Binding SelectItem}"

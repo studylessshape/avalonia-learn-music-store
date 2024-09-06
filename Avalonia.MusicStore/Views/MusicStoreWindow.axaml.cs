@@ -17,6 +17,6 @@ public partial class MusicStoreWindow : Window
 
         InitializeComponent();
 
-        view.ViewModel.EnsureSelectEvent += Close;
+        view.ViewModel.BuyMusicEvent += Close;
     }
 }
