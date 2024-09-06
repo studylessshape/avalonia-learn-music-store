@@ -34,7 +34,7 @@
                         Command="{Binding BuyMusicCommand}"
                         />
                 <ListBox ItemsSource="{Binding SearchResults}"
-                         SelectedItem="{Binding SelectItem}"
+                         SelectedItem="{Binding SelectedAlbum}"
                          Background="Transparent"
                          Margin="0 20"
                          >

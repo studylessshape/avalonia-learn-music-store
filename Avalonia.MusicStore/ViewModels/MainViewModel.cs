@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Avalonia.MusicStore.ViewModels;
@@ -11,7 +12,15 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private async void BuyMusic()
     {
-        var getTask = GetAlbumEvent?.Invoke();
-        var album = getTask == null ? null : await getTask;
+        var task = GetAlbumEvent?.Invoke();
+        var result = task == null ? null : await task;
+
+        if (result != null)
+        {
+            Albums.Add(result);
+        }
     }
+
+    public ObservableCollection<AlbumViewModel> Albums { get; } = new();
+
 }
